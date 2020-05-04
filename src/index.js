@@ -22,6 +22,7 @@ async function main() {
     log.info("Reconciling...");
     var stdinBuffer = fs.readFileSync(0); // STDIN_FILENO = 0
     const obj = JSON.parse(stdinBuffer);
+    log.debug('%o',obj);
     await asyncForEach(obj, async (item) => {
       const replace = "^" + prefix;
       var re = new RegExp(replace, "g");
@@ -31,11 +32,11 @@ async function main() {
         const result = key.match(regexp);
         if (!result) {
           log.error("Key is in wrong format, ignoring", key);
-          return;
+        } else {
+          const namespace = result[1];
+          const configmap = result[2];
+          await reconcile(namespace, configmap, item);
         }
-        const namespace = result[1];
-        const configmap = result[2];
-        await reconcile(namespace, configmap, item);
       } catch (error) {
         log.error(error);
       }
@@ -61,6 +62,7 @@ const reconcile = async (namespace, configmap, data) => {
       log.debug('Configmap doesn\'t exist');
       const cm = libk8s.createConfigMap(namespace, configmap, data);
       await libk8s.saveNewConfigmap(namespace, cm);
+      log.info("%s/%s created", namespace, configmap);
       return;
     }
 
