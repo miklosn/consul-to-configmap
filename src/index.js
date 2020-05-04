@@ -72,7 +72,7 @@ const reconcile = async (namespace, configmap, data) => {
       return;
     }
 
-    let buff = Buffer.from(data.Value, 'base64');
+    let buff = Buffer.from(data.Value, 'base64'); // TODO: data is empty
     let text = buff.toString('ascii');
     configMap.data = { data: text };
     configMap.metadata.annotations["consul-to-configmap"] = currentVersion;

@@ -14,6 +14,7 @@ spec:
       labels:
         app: consul-to-configmap
     spec:
+      serviceAccountName: consul-to-configmap
       terminationGracePeriodSeconds: 1
       containers:
       - name: consul-to-configmap
@@ -21,3 +22,7 @@ spec:
         env:
         - name: CONSUL_PREFIX
           value: "foo/"
+        - name: CONSUL_HTTP_ADDR
+          value: "http://consul:8500"
+        - name: LOGLEVEL
+          value: "info"

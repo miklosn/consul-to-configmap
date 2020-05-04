@@ -12,7 +12,7 @@ WORKDIR /app
 COPY src/package-lock.json src/package.json ./
 RUN npm install
 COPY src/ ./
-ENV CONSUL_HTTP_ADDR http://consul:8500
+#ENV CONSUL_HTTP_ADDR http://consul:8500
 #ENV CONSUL_PREFIX
 RUN ls -la /app
 CMD /usr/local/bin/consul watch -type=keyprefix -prefix=${CONSUL_PREFIX} /app/handler.sh
