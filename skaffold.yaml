@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+metadata:
+  name: consul-to-configmap
+build:
+  artifacts:
+  - image: miklosn/consul-to-configmap
+deploy:
+  kubectl:
+    manifests:
+    - k8s/*.yaml

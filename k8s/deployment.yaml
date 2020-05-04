@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consul-to-configmap
+spec:
+  selector:
+    matchLabels:
+      app: consul-to-configmap
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: consul-to-configmap
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: consul-to-configmap
+        image: miklosn/consul-to-configmap
+        env:
+        - name: CONSUL_PREFIX
+          value: "foo/"

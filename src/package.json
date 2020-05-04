@@ -1,0 +1,21 @@
+{
+  "name": "consul-to-configmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@kubernetes/client-node": "^0.11.2",
+    "isomorphic-ws": "^4.0.1",
+    "signale": "^1.4.0",
+    "winston": "^3.2.1",
+    "ws": "^7.2.5"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
+}
